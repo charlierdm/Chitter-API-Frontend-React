@@ -6,21 +6,20 @@ const App = () =>  {
   const [peeps, setPeeps] = useState();
 
   useEffect(() => {
-    fetchPeepsPromise();
+    fetchPeepsPromise()
   }, [])
 
   const fetchPeepsPromise = () => {
     fetch("https://chitter-backend-api-v2.herokuapp.com/peeps")
     .then(res => res.json())
-    .then(data => setPeeps(data.map(peep => `${peep.body}\n`)));
+    .then(data => setPeeps(data.reverse().map(peep => <ul key={peep.id}>{peep.body}</ul>)));
   }
 
   return (
     <div className="App">
       <header className="App-header">
-      <p>{peeps}</p>
+      {peeps}
       </header>
-      
     </div>
   );
 }
