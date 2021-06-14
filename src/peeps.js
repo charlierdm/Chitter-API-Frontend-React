@@ -14,17 +14,18 @@ const Peeps = () => {
       .then((res) => res.json())
       .then((data) =>
         setPeeps(
-          data.reverse().map((peep) => (
-            <ul key={peep.id}>
-              {peep.body}
-              <br />
+          data.map((peep) => (
+            <ul className="peeps-list" key={peep.id}>
+              <div className="peep-body">{peep.body}</div>
               posted by: {peep.user.handle}
               <br /> on: {dateFormat(peep.created_at)}
+              <div>{peep.likes.length} likes</div>
             </ul>
           ))
         )
       );
   };
+
 
   return (
     <div>{peeps}</div>
