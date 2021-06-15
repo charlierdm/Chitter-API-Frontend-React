@@ -1,13 +1,18 @@
-import Peeps from "./peeps";
-import User from "./user"
+import Peeps from "./Peeps";
+import SignUp from "./SignUp";
+import User from "./User";
 import "./App.css";
 
 const App = () => {
-
   return (
-    <div className="App">
-      <div><User /></div>
-      <div className="Peeps"><Peeps /></div>
+    <div className="app">
+      <span className="title">Chitter</span>
+      <div>
+        <SignUp />
+      </div>
+      <div className="peeps">
+        <Peeps />
+      </div>
     </div>
   );
 };

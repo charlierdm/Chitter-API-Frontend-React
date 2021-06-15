@@ -1,9 +1,9 @@
-.App {
+.app {
   text-align: center;
+  background-color: #cab49a;
 }
 
-.Peeps {
-  background-color: #cab49a;
+.peeps {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -15,4 +15,12 @@
 
 .peep-body {
   margin-bottom: 2%;
+}
+
+.title {
+  font-size: 3.5em;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  font-style: italic;
+  text-decoration: underline;
 }
