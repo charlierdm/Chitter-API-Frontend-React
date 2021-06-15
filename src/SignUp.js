@@ -11,7 +11,6 @@ const SignUp = () => {
     createSession("https://chitter-backend-api-v2.herokuapp.com/sessions", {
       session: { handle: `"${userName}"`, password: `"${passWord}"` },
     }).then((data) => setSessionData(data));
-    console.log(sessionData);
   }, [userData]);
 
   const createUser = async (url = "", data = {}) => {

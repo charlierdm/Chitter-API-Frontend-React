@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import dateFormat from "dateformat";
 import "./App.css";
 
-const Peeps = () => {
+const DisplayPeeps = () => {
   const [peeps, setPeeps] = useState();
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const Peeps = () => {
   };
 
   return (
-    <div>
+    <div className="peeps">
       {peeps ? peeps.map((peep) => (
         <ul className="peeps-list" key={peep.id}>
           <div className="peep-body">{peep.body}</div>
@@ -29,4 +29,4 @@ const Peeps = () => {
   );
 };
 
-export default Peeps;
+export default DisplayPeeps;
