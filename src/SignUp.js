@@ -2,9 +2,17 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 const SignUp = () => {
+  const [userName, setUsername] = useState();
+  const [passWord, setPassword] = useState();
+  const [userData, setUserData] = useState();
+  const [sessionData, setSessionData] = useState();
 
-  const [id, setId] = useState();
-  const [handle, setHandle] = useState();
+  useEffect(() => {
+    createSession("https://chitter-backend-api-v2.herokuapp.com/sessions", {
+      session: { handle: `"${userName}"`, password: `"${passWord}"` },
+    }).then((data) => setSessionData(data));
+    console.log(sessionData);
+  }, [userData]);
 
   const createUser = async (url = "", data = {}) => {
     const userResponse = await fetch(url, {
@@ -17,11 +25,6 @@ const SignUp = () => {
     return userResponse.json();
   };
 
-  // createUser("https://chitter-backend-api-v2.herokuapp.com/users", {"user": {"handle":"cccdm", "password":"654321"}})
-  // .then(data => {
-  //   console.log(data);
-  // });
-
   const createSession = async (url = "", data = {}) => {
     const sessionResponse = await fetch(url, {
       method: "POST",
@@ -33,17 +36,29 @@ const SignUp = () => {
     return sessionResponse.json();
   };
 
-  //  createSession("https://chitter-backend-api-v2.herokuapp.com/sessions", {"session": {"handle":"cccdm", "password":"654321"}})
-  // .then(data => {
-  //   console.log(data);
-  // });
-
   return (
     <div className="sign-up">
-
+      <input
+        type="username"
+        placeholder="username"
+        onChange={(e) => setUsername(e.target.value)}
+      ></input>
+      <input
+        type="password"
+        placeholder="password"
+        onChange={(e) => setPassword(e.target.value)}
+      ></input>
+      <button
+        onClick={() => {
+          createUser("https://chitter-backend-api-v2.herokuapp.com/users", {
+            user: { handle: `"${userName}"`, password: `"${passWord}"` },
+          }).then((data) => setUserData(data));
+        }}
+      >
+        Sign Up
+      </button>
     </div>
-  )
-
-}
+  );
+};
 
 export default SignUp;
