@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
 const SignUp = () => {
@@ -6,12 +6,6 @@ const SignUp = () => {
   const [passWord, setPassword] = useState();
   const [userData, setUserData] = useState();
   const [sessionData, setSessionData] = useState();
-
-  useEffect(() => {
-    createSession("https://chitter-backend-api-v2.herokuapp.com/sessions", {
-      session: { handle: `"${userName}"`, password: `"${passWord}"` },
-    }).then((data) => setSessionData(data));
-  }, [userData]);
 
   const createUser = async (url = "", data = {}) => {
     const userResponse = await fetch(url, {
@@ -36,26 +30,57 @@ const SignUp = () => {
   };
 
   return (
-    <div className="sign-up">
-      <input
-        type="username"
-        placeholder="username"
-        onChange={(e) => setUsername(e.target.value)}
-      ></input>
-      <input
-        type="password"
-        placeholder="password"
-        onChange={(e) => setPassword(e.target.value)}
-      ></input>
-      <button
-        onClick={() => {
-          createUser("https://chitter-backend-api-v2.herokuapp.com/users", {
-            user: { handle: `"${userName}"`, password: `"${passWord}"` },
-          }).then((data) => setUserData(data));
-        }}
-      >
-        Sign Up
-      </button>
+    <div>
+      {sessionData ? (
+        `Hello ${userName}`
+      ) : (
+        <div>
+          <input
+            type="username"
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          ></input>
+          <input
+            type="password"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+          <button
+            onClick={() => {
+              createUser("https://chitter-backend-api-v2.herokuapp.com/users", {
+                user: { handle: `"${userName}"`, password: `"${passWord}"` },
+              }).then((data) => setUserData(data));
+            }}
+          >
+            Sign Up
+          </button>
+        </div>
+      )}
+
+      <div className = 'log-in'>
+        <input
+          type="username"
+          placeholder="username"
+          onChange={(e) => setUsername(e.target.value)}
+        ></input>
+        <input
+          type="password"
+          placeholder="password"
+          onChange={(e) => setPassword(e.target.value)}
+        ></input>
+        <button
+          onClick={() => {
+            createSession(
+              "https://chitter-backend-api-v2.herokuapp.com/sessions",
+              {
+                session: { handle: `"${userName}"`, password: `"${passWord}"` }
+              }
+            ).then((data) => setSessionData(data));
+          }}
+        >
+          Log In
+        </button>
+      </div>
     </div>
   );
 };

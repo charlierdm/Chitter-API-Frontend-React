@@ -1,19 +1,51 @@
 .app {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
   background-color: #cab49a;
 }
+
+input {
+  border-style: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  padding:1%;
+  margin: 2%;
+  }
+
+button {
+  border-style: none;
+  background-color: rgb(255, 255, 255);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  }
 
 .sign-up {
   text-align: center;
 }
+
 .peeps {
-  text-align: center;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin: 1%;
+  text-align: center;
+}
+
+.peep-details {
+  padding: 3%;
+}
+
+.peeps-list {
+  border-style: solid;
+  border-color: whitesmoke;
+  border-radius: 10px;
+  width: auto;
+  display: table;
+  margin:auto;
+  margin-bottom: 5%;
 }
 
 .peep-body {
@@ -21,7 +53,6 @@
 }
 
 .title {
-  text-align: center;
   font-size: 3.5em;
   font-weight: bold;
   color: rgb(255, 255, 255);

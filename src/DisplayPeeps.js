@@ -20,9 +20,11 @@ const DisplayPeeps = () => {
       {peeps ? peeps.map((peep) => (
         <ul className="peeps-list" key={peep.id}>
           <div className="peep-body">{peep.body}</div>
+          <div className="peep-details">
           posted by: {peep.user.handle}
           <br /> on: {dateFormat(peep.created_at)}
           <div>{peep.likes.length} likes</div>
+          </div>
         </ul>
       )): 'Loading...'}
     </div>
