@@ -1,11 +1,10 @@
 import { useState } from "react";
+import Button from 'react-bootstrap/Button';
 import "./App.css";
 
-const SignUp = () => {
+const SignUp = ({ session, setSession }) => {
   const [userName, setUsername] = useState();
   const [passWord, setPassword] = useState();
-  const [userData, setUserData] = useState();
-  const [sessionData, setSessionData] = useState();
 
   const createUser = async (url = "", data = {}) => {
     const userResponse = await fetch(url, {
@@ -29,8 +28,6 @@ const SignUp = () => {
     return sessionResponse.json();
   };
 
-  console.log(sessionData)
-
   return (
     <div>
       <div>
@@ -43,18 +40,57 @@ const SignUp = () => {
           type="password"
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
-        ></input>
-        <button
+        ></input><br/>
+        {session ? "" : 
+        <div>
+
+        <Button
+          variant="outline-light"
           onClick={() => {
             createUser("https://chitter-backend-api-v2.herokuapp.com/users", {
-              user: { handle: `"${userName}"`, password: `"${passWord}"` },
-            }).then((data) => createSession("https://chitter-backend-api-v2.herokuapp.com/sessions", {
-              session: { handle: `"${userName}"`, password: `"${passWord}"` }
-            })).then((data) => setSessionData(data))
+              user: {
+                handle: `"${userName}"`,
+                password: `"${passWord}"`,
+              },
+            })
+              .then((data) =>
+                createSession(
+                  "https://chitter-backend-api-v2.herokuapp.com/sessions",
+                  {
+                    session: {
+                      handle: `"${userName}"`,
+                      password: `"${passWord}"`,
+                    },
+                  }
+                )
+              )
+              .then((data) => setSession(data));
           }}
         >
-          Sign up
-        </button>
+          Sign Up
+        </Button>
+
+        <Button
+          variant="outline-light"
+          onClick={() => {
+            createSession(
+              "https://chitter-backend-api-v2.herokuapp.com/sessions",
+              {
+                session: {
+                  handle: `"${userName}"`,
+                  password: `"${passWord}"`,
+                },
+              }
+            ).then((data) => setSession(data));
+          }}
+        >
+          Log in
+        </Button>
+
+        </div>
+        
+        }
+      
       </div>
     </div>
   );
