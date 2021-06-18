@@ -30,7 +30,7 @@ button {
   min-height: 100vh;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin: 1%;
+  margin: 2%;
   text-align: center;
 }
 
@@ -50,6 +50,7 @@ button {
 
 .peep-body {
   margin-bottom: 2%;
+  margin-right: 1%;
 }
 
 .title {

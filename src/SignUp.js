@@ -29,35 +29,11 @@ const SignUp = () => {
     return sessionResponse.json();
   };
 
+  console.log(sessionData)
+
   return (
     <div>
-      {sessionData ? (
-        `Hello ${userName}`
-      ) : (
-        <div>
-          <input
-            type="username"
-            placeholder="username"
-            onChange={(e) => setUsername(e.target.value)}
-          ></input>
-          <input
-            type="password"
-            placeholder="password"
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-          <button
-            onClick={() => {
-              createUser("https://chitter-backend-api-v2.herokuapp.com/users", {
-                user: { handle: `"${userName}"`, password: `"${passWord}"` },
-              }).then((data) => setUserData(data));
-            }}
-          >
-            Sign Up
-          </button>
-        </div>
-      )}
-
-      <div className = 'log-in'>
+      <div>
         <input
           type="username"
           placeholder="username"
@@ -70,15 +46,14 @@ const SignUp = () => {
         ></input>
         <button
           onClick={() => {
-            createSession(
-              "https://chitter-backend-api-v2.herokuapp.com/sessions",
-              {
-                session: { handle: `"${userName}"`, password: `"${passWord}"` }
-              }
-            ).then((data) => setSessionData(data));
+            createUser("https://chitter-backend-api-v2.herokuapp.com/users", {
+              user: { handle: `"${userName}"`, password: `"${passWord}"` },
+            }).then((data) => createSession("https://chitter-backend-api-v2.herokuapp.com/sessions", {
+              session: { handle: `"${userName}"`, password: `"${passWord}"` }
+            })).then((data) => setSessionData(data))
           }}
         >
-          Log In
+          Sign up
         </button>
       </div>
     </div>
