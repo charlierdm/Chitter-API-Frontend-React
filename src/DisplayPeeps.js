@@ -24,6 +24,7 @@ const DisplayPeeps = () => {
           posted by: {peep.user.handle}
           <br /> on: {dateFormat(peep.created_at)}
           <div>{peep.likes.length} likes</div>
+          {peep.id}
           </div>
         </ul>
       )): 'Loading...'}

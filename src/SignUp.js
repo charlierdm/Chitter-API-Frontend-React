@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Button from 'react-bootstrap/Button';
 import "./App.css";
 
 const SignUp = ({ session, setSession }) => {
@@ -44,8 +43,7 @@ const SignUp = ({ session, setSession }) => {
         {session ? "" : 
         <div>
 
-        <Button
-          variant="outline-light"
+        <button
           onClick={() => {
             createUser("https://chitter-backend-api-v2.herokuapp.com/users", {
               user: {
@@ -68,10 +66,9 @@ const SignUp = ({ session, setSession }) => {
           }}
         >
           Sign Up
-        </Button>
+        </button>
 
-        <Button
-          variant="outline-light"
+        <button
           onClick={() => {
             createSession(
               "https://chitter-backend-api-v2.herokuapp.com/sessions",
@@ -85,7 +82,7 @@ const SignUp = ({ session, setSession }) => {
           }}
         >
           Log in
-        </Button>
+        </button>
 
         </div>
         
