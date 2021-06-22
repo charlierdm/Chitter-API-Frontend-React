@@ -59,9 +59,11 @@ const DisplayPeeps = (session) => {
           <div>{peep.likes.length} likes</div>
           {peep.id}<br />
           <button onClick={() => deletePeepData(`https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}`)}>delete</button><br/>
-          <img onClick={() => createLikeData(`https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`)} src={process.env.PUBLIC_URL + '/like.svg'} /> 
-            
-         
+          <img id="like" width="50" onClick={() => 
+          createLikeData(`https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`)
+          }
+          
+          src={process.env.PUBLIC_URL + '/like.svg'} /> 
           
           </div>
         </ul>

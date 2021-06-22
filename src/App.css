@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #cab49a;
+  background-color: #d8c7b3;
 }
 
 input {
@@ -59,7 +59,9 @@ button {
 
 .peep-text-input {
   border-style: none;
-  padding:1%
+  padding:1%;
+  width: 500px;
+  height: 150px;
 }
 
 .title {
