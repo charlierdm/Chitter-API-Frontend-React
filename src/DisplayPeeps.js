@@ -30,7 +30,7 @@ const DisplayPeeps = (session) => {
     const response = await fetch(url, {
       method: "PUT",
       headers: {
-        Authorization: "",
+        Authorization: `Token token=${session.session.session_key}`,
         "Content-Type": "application/json",
       },
     });
@@ -57,8 +57,10 @@ const DisplayPeeps = (session) => {
           posted by: {peep.user.handle}
           <br /> on: {dateFormat(peep.created_at)}
           <div>{peep.likes.length} likes</div>
-          {peep.id}
-            <button onClick={() => deletePeepData(`https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}`)}>delete</button>
+          {peep.id}<br />
+          <button onClick={() => deletePeepData(`https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}`)}>delete</button><br/>
+          <img onClick={() => createLikeData(`https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`)} src={process.env.PUBLIC_URL + '/like.svg'} /> 
+            
          
           
           </div>
