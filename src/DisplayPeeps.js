@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import dateFormat from "dateformat";
 import "./App.css";
 
-const DisplayPeeps = () => {
+const DisplayPeeps = (session) => {
   const [peeps, setPeeps] = useState();
 
   useEffect(() => {
     fetchPeepsPromise();
-  }, []);
+  }, [peeps]);
 
   const fetchPeepsPromise = () => {
     fetch("https://chitter-backend-api-v2.herokuapp.com/peeps")
@@ -19,7 +19,7 @@ const DisplayPeeps = () => {
     const response = await fetch(url, {
       method: "DELETE",
       headers: {
-        Authorization: "",
+        Authorization: `Token token=${session.session.session_key}`,
         "Content-Type": "application/json",
       },
     });
@@ -58,6 +58,9 @@ const DisplayPeeps = () => {
           <br /> on: {dateFormat(peep.created_at)}
           <div>{peep.likes.length} likes</div>
           {peep.id}
+            <button onClick={() => deletePeepData(`https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}`)}>delete</button>
+         
+          
           </div>
         </ul>
       )): 'Loading...'}

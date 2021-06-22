@@ -9,7 +9,7 @@ export const CreatePeep = ({session}) => {
     const response = await fetch(url, {
       method: "POST",
       headers: {
-        Authorization: `"Token token=${session.session_key}"`,
+        Authorization: `Token token=${session.session_key}`,
         "Content-Type": "application/json",
         responseType: 'text'
       },
@@ -20,9 +20,9 @@ export const CreatePeep = ({session}) => {
 
   return (
     <div>
-      <textarea className="peep-text-input" onChange={(e) => setPeepBody(e.target.value)}>
+      <input className="peep-text-input" onChange={(e) => setPeepBody(e.target.value)}>
 
-      </textarea> 
+      </input> 
       <button onClick={() => {postPeepData("https://chitter-backend-api-v2.herokuapp.com/peeps",
       {
         "peep": {"user_id":`${session.user_id}`, "body":`"${peepBody}"`}

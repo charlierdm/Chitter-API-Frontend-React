@@ -4,10 +4,10 @@ import { CreatePeep } from "./CreatePeep";
 import { useState } from "react";
 import "./App.css";
 
+
+
 const App = () => {
   const [sessionData, setSessionData] = useState();
-
-  console.log(sessionData)
 
   return (
     <div className="app">
@@ -23,7 +23,7 @@ const App = () => {
         <CreatePeep session={sessionData}/>
       </div>
       <div>
-        <DisplayPeeps />
+        <DisplayPeeps session={sessionData} />
       </div>
     </div>
   );
