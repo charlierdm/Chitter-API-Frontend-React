@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  background-color: #d8c7b3;
+  background-color: #c4b9ad;
 }
 
 input {
@@ -46,7 +46,7 @@ button {
   border-style: solid;
   border-color: whitesmoke;
   border-radius: 10px;
-  border-spacing:6em 0.2em;
+  border-spacing: 6em 0.2em;
   border-width: 0.3rem;
   display: table;
   margin: auto;
@@ -56,6 +56,12 @@ button {
 .peep-body {
   margin-bottom: 2%;
   margin-right: 1%;
+  border-radius: 0.4em;
+  border-style:none;
+  padding:3%;
+  border-color: whitesmoke;
+  color: black;
+  margin:auto
 }
 
 .peep-text-input {
@@ -64,7 +70,7 @@ button {
   width: 500px;
   height: 150px;
   border-radius: 0.4em;
-  margin:auto
+  margin: auto;
 }
 
 .title {
@@ -76,10 +82,11 @@ button {
 }
 
 .images {
+  fill:lavender;
   padding: 1em;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .images:hover {
-  fill:rgb(102, 175, 175) !important
+  fill: rgb(102, 175, 175) !important;
 }
