@@ -20,12 +20,12 @@ export const CreatePeep = ({session}) => {
 
   return (
     <div>
-      <textarea className="peep-text-input" onChange={(e) => setPeepBody(e.target.value)}>
+      <textarea placeholder="What would you like to post today?" className="peep-text-input" onChange={(e) => setPeepBody(e.target.value)}>
 
-      </textarea> 
+      </textarea><br/>
       <button onClick={() => {postPeepData("https://chitter-backend-api-v2.herokuapp.com/peeps",
       {
-        "peep": {"user_id":`${session.user_id}`, "body":`"${peepBody}"`}
+        "peep": {"user_id":`${session.user_id}`, "body":`${peepBody}`}
       }
       )}}>Submit</button>
 
