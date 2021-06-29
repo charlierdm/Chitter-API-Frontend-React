@@ -6,7 +6,8 @@ import "./App.css";
 
 const App = () => {
   const [sessionData, setSessionData] = useState();
-  const [loggedIn, setLoggedIn] = useState(false);
+
+  console.log(sessionData)
 
   return (
     <div className="app">
@@ -17,14 +18,14 @@ const App = () => {
             Log Out
           </button>
         ) : (
-          <SignUp setSession={setSessionData} setLogin={setLoggedIn} />
+          <SignUp setSession={setSessionData} />
         )}
       </div>
       <div>
         <CreatePeep session={sessionData} />
       </div>
       <div>
-        <DisplayPeeps session={sessionData} setLogin={loggedIn} />
+        <DisplayPeeps session={sessionData} />
       </div>
     </div>
   );

@@ -4,6 +4,8 @@ import "./App.css";
 export const CreatePeep = ({ session }) => {
   const [peepBody, setPeepBody] = useState();
 
+  console.log(session)
+
   const postPeepData = async (url = "", data = {}) => {
     const response = await fetch(url, {
       method: "POST",
@@ -20,7 +22,9 @@ export const CreatePeep = ({ session }) => {
   if (session) {
     return (
       <div>
+        
         <textarea
+          id="input-peep"
           placeholder="What would you like to post today?"
           className="peep-text-input"
           onChange={(e) => setPeepBody(e.target.value)}
@@ -29,8 +33,8 @@ export const CreatePeep = ({ session }) => {
         <button
           onClick={() => {
             postPeepData("https://chitter-backend-api-v2.herokuapp.com/peeps", {
-              peep: { user_id: `${session.user_id}`, body: `${peepBody}` },
-            });
+              peep: { user_id: `${session.user_id}`, body: `${peepBody}` }
+            }); 
           }}
         >
           Submit

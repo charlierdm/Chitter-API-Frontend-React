@@ -2,8 +2,8 @@ import { useState } from "react";
 import "./App.css";
 
 const SignUp = ({ session, setSession }) => {
-  const [userName, setUsername] = useState();
-  const [passWord, setPassword] = useState();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
 
   const createUser = async (url = "", data = {}) => {
     const userResponse = await fetch(url, {
@@ -24,7 +24,6 @@ const SignUp = ({ session, setSession }) => {
       },
       body: JSON.stringify(data),
     });
-    setSession(true);
     return sessionResponse.json();
   };
 
@@ -52,18 +51,18 @@ const SignUp = ({ session, setSession }) => {
                   "https://chitter-backend-api-v2.herokuapp.com/users",
                   {
                     user: {
-                      handle: `"${userName}"`,
-                      password: `"${passWord}"`,
+                      handle: `${username}`,
+                      password: `${password}`,
                     },
                   }
                 )
-                  .then((data) =>
+                  .then(() =>
                     createSession(
                       "https://chitter-backend-api-v2.herokuapp.com/sessions",
                       {
                         session: {
-                          handle: `"${userName}"`,
-                          password: `"${passWord}"`,
+                          handle: `${username}`,
+                          password: `${password}`,
                         },
                       }
                     )
@@ -80,8 +79,8 @@ const SignUp = ({ session, setSession }) => {
                   "https://chitter-backend-api-v2.herokuapp.com/sessions",
                   {
                     session: {
-                      handle: `"${userName}"`,
-                      password: `"${passWord}"`,
+                      handle: `${username}`,
+                      password: `${password}`,
                     },
                   }
                 ).then((data) => setSession(data));

@@ -4,6 +4,7 @@ import "./App.css";
 
 const DisplayPeeps = (session) => {
   const [peeps, setPeeps] = useState();
+  const [peepId, setPeepId] = useState();
 
   useEffect(() => {
     fetchPeepsPromise();
@@ -13,6 +14,13 @@ const DisplayPeeps = (session) => {
     fetch("https://chitter-backend-api-v2.herokuapp.com/peeps")
       .then((res) => res.json())
       .then((data) => setPeeps(data));
+  };
+
+  const getUniquePeep = async (url = "") => {
+    const response = await fetch(url, {
+      method: "GET",
+    });
+    return response;
   };
 
   const deletePeepData = async (url = "") => {
@@ -41,7 +49,7 @@ const DisplayPeeps = (session) => {
     const response = await fetch(url, {
       method: "DELETE",
       headers: {
-        Authorization: "",
+        Authorization: `Token token=${session.session.session_key}`,
         "Content-Type": "application/json",
       },
     });
@@ -59,7 +67,7 @@ const DisplayPeeps = (session) => {
                 <br />
                 {dateFormat(peep.created_at, "mmmm dS, h:MM:ss TT")}
                 <div>
-                  {peep.likes.length}{" "}
+                  {`${peep.likes.length} `}
                   {peep.likes.length === 1 ? "like" : "likes"}
                 </div>
                 <img
@@ -80,9 +88,18 @@ const DisplayPeeps = (session) => {
                   className="images"
                   width="35"
                   onClick={() =>
-                    createLikeData(
-                      `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`
-                    )
+                    peep.user.id === session.session.user_id ?
+                    peep.likes[0].user.handle === session.session.user_id
+                      ? () =>
+                          deleteLikeData(
+                            `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`
+                          )
+                      : () =>
+                          createLikeData(
+                            `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`
+                          )
+                          : 
+                          alert('Cannot delete aother users peep!')
                   }
                   src={process.env.PUBLIC_URL + "/like.svg"}
                 />
