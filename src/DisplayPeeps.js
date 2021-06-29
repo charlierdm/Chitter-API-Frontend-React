@@ -4,7 +4,6 @@ import "./App.css";
 
 const DisplayPeeps = (session) => {
   const [peeps, setPeeps] = useState();
-  const [peepId, setPeepId] = useState();
 
   useEffect(() => {
     fetchPeepsPromise();
@@ -14,13 +13,6 @@ const DisplayPeeps = (session) => {
     fetch("https://chitter-backend-api-v2.herokuapp.com/peeps")
       .then((res) => res.json())
       .then((data) => setPeeps(data));
-  };
-
-  const getUniquePeep = async (url = "") => {
-    const response = await fetch(url, {
-      method: "GET",
-    });
-    return response;
   };
 
   const deletePeepData = async (url = "") => {

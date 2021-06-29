@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  background-color: #b8d2c4
+  background-color: #b8d2c4;
 }
 
 input {
@@ -79,7 +79,7 @@ button {
 }
 
 .images {
-  fill:lavender;
+  fill: lavender;
   padding: 0.5em;
   cursor: pointer;
 }

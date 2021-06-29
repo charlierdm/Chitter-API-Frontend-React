@@ -7,8 +7,6 @@ import "./App.css";
 const App = () => {
   const [sessionData, setSessionData] = useState();
 
-  console.log(sessionData)
-
   return (
     <div className="app">
       <div className="title">Chitter</div>
