@@ -56,6 +56,26 @@ const DisplayPeeps = (session) => {
     return response;
   };
 
+  const likeUnlike = (peep) => {
+    if (peep.likes.length === 0) {
+      createLikeData(
+        `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`
+      );
+    }
+
+    peep.likes.forEach((el) => {
+      if (el.user.id === session.session.user_id) {
+        deleteLikeData(
+          `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`
+        );
+      } else {
+        createLikeData(
+          `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`
+        );
+      }
+    });
+  };
+
   return (
     <div className="peeps">
       {peeps
@@ -70,39 +90,29 @@ const DisplayPeeps = (session) => {
                   {`${peep.likes.length} `}
                   {peep.likes.length === 1 ? "like" : "likes"}
                 </div>
-                <img
-                  alt="cross"
-                  title="delete"
-                  className="images"
-                  width="30"
-                  onClick={() =>
-                    deletePeepData(
-                      `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}`
-                    )
-                  }
-                  src={process.env.PUBLIC_URL + "cross.svg"}
-                />
-                <img
-                  alt="thumbs-up"
-                  title="like"
-                  className="images"
-                  width="35"
-                  onClick={() =>
-                    peep.user.id === session.session.user_id ?
-                    peep.likes[0].user.handle === session.session.user_id
-                      ? () =>
-                          deleteLikeData(
-                            `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`
-                          )
-                      : () =>
-                          createLikeData(
-                            `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`
-                          )
-                          : 
-                          alert('Cannot delete aother users peep!')
-                  }
-                  src={process.env.PUBLIC_URL + "/like.svg"}
-                />
+                <div id="svg-images">
+                  <img
+                    alt="cross"
+                    title="delete"
+                    className="images"
+                    width="30"
+                    onClick={() =>
+                      deletePeepData(
+                        `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}`
+                      )
+                    }
+                    src={process.env.PUBLIC_URL + "cross.svg"}
+                  />
+
+                  <img
+                    alt="thumbs-up"
+                    title="like"
+                    className="images"
+                    width="35"
+                    onClick={() => likeUnlike(peep)}
+                    src={process.env.PUBLIC_URL + "/like.svg"}
+                  />
+                </div>
               </div>
             </ul>
           ))
