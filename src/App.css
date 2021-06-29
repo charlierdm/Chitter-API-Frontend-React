@@ -1,8 +1,9 @@
 .app {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   text-align: center;
-  background-color: #b4cad0
+  background-color: #b8d2c4
 }
 
 input {
@@ -36,16 +37,16 @@ button {
 }
 
 .peep-details {
-  text-align: center;
+  color: rgb(95, 95, 95);
   margin-right: 22%;
   padding: 1%;
   font-size: 80%;
 }
 
 .peeps-list {
-  text-align: center;
   border-style: solid;
   border-color: whitesmoke;
+  background-color: #a1cab5;
   border-radius: 10px;
   border-spacing: 6em 0.2em;
   border-width: 0.3rem;
