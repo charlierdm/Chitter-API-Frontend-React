@@ -84,7 +84,8 @@ const DisplayPeeps = (session) => {
                   {`${peep.likes.length} `}
                   {peep.likes.length === 1 ? "like" : "likes"}
                 </div>
-                <div id="svg-images">
+                {session.session &&
+                  <div id="svg-images">
                   <img
                     alt="cross"
                     title="delete"
@@ -107,6 +108,10 @@ const DisplayPeeps = (session) => {
                     src={process.env.PUBLIC_URL + "/like.svg"}
                   />
                 </div>
+                
+                }
+                
+
               </div>
             </ul>
           ))
