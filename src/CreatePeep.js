@@ -4,7 +4,7 @@ import "./App.css";
 export const CreatePeep = ({ session }) => {
   const [peepBody, setPeepBody] = useState();
 
-  console.log(session)
+  const chitter = "https://chitter-backend-api-v2.herokuapp.com"
 
   const postPeepData = async (url = "", data = {}) => {
     const response = await fetch(url, {
@@ -32,7 +32,7 @@ export const CreatePeep = ({ session }) => {
         <br />
         <button
           onClick={() => {
-            postPeepData("https://chitter-backend-api-v2.herokuapp.com/peeps", {
+            postPeepData(`${chitter}/peeps`, {
               peep: { user_id: `${session.user_id}`, body: `${peepBody}` }
             }); 
           }}

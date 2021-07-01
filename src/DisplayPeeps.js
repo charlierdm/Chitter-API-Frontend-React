@@ -5,12 +5,14 @@ import "./App.css";
 const DisplayPeeps = (session) => {
   const [peeps, setPeeps] = useState();
 
+  const chitter = "https://chitter-backend-api-v2.herokuapp.com"
+
   useEffect(() => {
     fetchPeepsPromise();
   }, [peeps]);
 
   const fetchPeepsPromise = () => {
-    fetch("https://chitter-backend-api-v2.herokuapp.com/peeps")
+    fetch(`${chitter}/peeps`)
       .then((res) => res.json())
       .then((data) => setPeeps(data));
   };
@@ -51,18 +53,18 @@ const DisplayPeeps = (session) => {
   const likeUnlike = (peep) => {
     if (peep.likes.length === 0) {
       createLikeData(
-        `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`
+        `${chitter}/peeps/${peep.id}/likes/${session.session.user_id}`
       );
     }
 
     peep.likes.forEach((el) => {
       if (el.user.id === session.session.user_id) {
         deleteLikeData(
-          `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`
+          `${chitter}/peeps/${peep.id}/likes/${session.session.user_id}`
         );
       } else {
         createLikeData(
-          `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}/likes/${session.session.user_id}`
+          `${chitter}/peeps/${peep.id}/likes/${session.session.user_id}`
         );
       }
     });
@@ -90,7 +92,7 @@ const DisplayPeeps = (session) => {
                     width="30"
                     onClick={() =>
                       deletePeepData(
-                        `https://chitter-backend-api-v2.herokuapp.com/peeps/${peep.id}`
+                        `${chitter}/peeps/${peep.id}`
                       )
                     }
                     src={process.env.PUBLIC_URL + "cross.svg"}

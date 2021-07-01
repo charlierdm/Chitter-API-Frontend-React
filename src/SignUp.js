@@ -5,7 +5,9 @@ const SignUp = ({ session, setSession }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
-  const createUser = async (url = "", data = {}) => {
+  const chitter = "https://chitter-backend-api-v2.herokuapp.com"
+
+  const sendUserRequest = async (url = "", data = {}) => {
     const userResponse = await fetch(url, {
       method: "POST",
       headers: {
@@ -14,17 +16,6 @@ const SignUp = ({ session, setSession }) => {
       body: JSON.stringify(data),
     });
     return userResponse.json();
-  };
-
-  const createSession = async (url = "", data = {}) => {
-    const sessionResponse = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    return sessionResponse.json();
   };
 
   return (
@@ -47,8 +38,8 @@ const SignUp = ({ session, setSession }) => {
           <div>
             <button
               onClick={() => {
-                createUser(
-                  "https://chitter-backend-api-v2.herokuapp.com/users",
+                sendUserRequest(
+                  `${chitter}/users`,
                   {
                     user: {
                       handle: `${username}`,
@@ -57,8 +48,8 @@ const SignUp = ({ session, setSession }) => {
                   }
                 )
                   .then(() =>
-                    createSession(
-                      "https://chitter-backend-api-v2.herokuapp.com/sessions",
+                    sendUserRequest(
+                      `${chitter}/sessions`,
                       {
                         session: {
                           handle: `${username}`,
@@ -75,8 +66,8 @@ const SignUp = ({ session, setSession }) => {
 
             <button
               onClick={() => {
-                createSession(
-                  "https://chitter-backend-api-v2.herokuapp.com/sessions",
+                sendUserRequest(
+                  `${chitter}/sessions`,
                   {
                     session: {
                       handle: `${username}`,
