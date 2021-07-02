@@ -30,35 +30,37 @@ button {
 }
 
 .peeps {
-  min-height: 100vh;
+  min-height: 80vh;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin: 0.2%;
+  margin:auto;
 }
 
 .peep-details {
+  width: max-content;
   color: rgb(95, 95, 95);
-  margin-right: 22%;
   padding: 1%;
-  font-size: 80%;
+  font-size: 75%;
+  margin:auto
 }
 
 .peeps-list {
+  padding: 0;
   border-style: solid;
   border-color: whitesmoke;
   background-color: #a1cab5;
   border-radius: 10px;
   border-spacing: 6em 0.2em;
-  border-width: 0.3rem;
   display: table;
-  margin: auto;
-  margin-bottom: 5%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .peep-body {
+  width: auto;
   margin-bottom: 2%;
-  margin-right: 22%;
   color: black;
+  font-size: 23px;
 }
 
 .peep-text-input {
