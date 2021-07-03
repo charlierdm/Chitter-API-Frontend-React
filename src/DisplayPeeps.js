@@ -2,17 +2,15 @@ import { useEffect, useState } from "react";
 import dateFormat from "dateformat";
 import "./App.css";
 
-const DisplayPeeps = (session) => {
+const DisplayPeeps = (props) => {
   const [peeps, setPeeps] = useState();
-
-  const chitter = "https://chitter-backend-api-v2.herokuapp.com"
 
   useEffect(() => {
     fetchPeepsPromise();
   }, [peeps]);
 
   const fetchPeepsPromise = () => {
-    fetch(`${chitter}/peeps`)
+    fetch(`${props.chitter}/peeps`)
       .then((res) => res.json())
       .then((data) => setPeeps(data));
   };
@@ -21,7 +19,7 @@ const DisplayPeeps = (session) => {
     const response = await fetch(url, {
       method: "DELETE",
       headers: {
-        Authorization: `Token token=${session.session.session_key}`,
+        Authorization: `Token token=${props.session.session_key}`,
         "Content-Type": "application/json",
       },
     });
@@ -32,7 +30,7 @@ const DisplayPeeps = (session) => {
     const response = await fetch(url, {
       method: "PUT",
       headers: {
-        Authorization: `Token token=${session.session.session_key}`,
+        Authorization: `Token token=${props.session.session_key}`,
         "Content-Type": "application/json",
       },
     });
@@ -43,7 +41,7 @@ const DisplayPeeps = (session) => {
     const response = await fetch(url, {
       method: "DELETE",
       headers: {
-        Authorization: `Token token=${session.session.session_key}`,
+        Authorization: `Token token=${props.session.session_key}`,
         "Content-Type": "application/json",
       },
     });
@@ -53,19 +51,19 @@ const DisplayPeeps = (session) => {
   const likeUnlike = (peep) => {
     if (peep.likes.length === 0) {
       createLikeData(
-        `${chitter}/peeps/${peep.id}/likes/${session.session.user_id}`
+        `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`
       );
     }
 
     peep.likes.forEach((el) => {
-      if (el.user.id === session.session.user_id) {
+      if (el.user.id === props.session.user_id) {
         deleteLikeData(
-          `${chitter}/peeps/${peep.id}/likes/${session.session.user_id}`
+          `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`
         );
       } else {
         createLikeData(
-          `${chitter}/peeps/${peep.id}/likes/${session.session.user_id}`
-        );
+          `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`
+        )
       }
     });
   };
@@ -84,7 +82,7 @@ const DisplayPeeps = (session) => {
                   {`${peep.likes.length} `}
                   {peep.likes.length === 1 ? "like" : "likes"}
                 </div>
-                {session.session &&
+                {props.session &&
                   <div id="svg-images">
                   <img
                     alt="cross"
@@ -93,7 +91,7 @@ const DisplayPeeps = (session) => {
                     width="30"
                     onClick={() =>
                       deletePeepData(
-                        `${chitter}/peeps/${peep.id}`
+                        `${props.chitter}/peeps/${peep.id}`
                       )
                     }
                     src={process.env.PUBLIC_URL + "cross.svg"}

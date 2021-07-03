@@ -6,6 +6,7 @@ import "./App.css";
 
 const App = () => {
   const [sessionData, setSessionData] = useState();
+  const chitter = "https://chitter-backend-api-v2.herokuapp.com"
 
   return (
     <div className="app">
@@ -16,14 +17,14 @@ const App = () => {
             Log Out
           </button>
         ) : (
-          <SignUp setSession={setSessionData} />
+          <SignUp setSession={setSessionData} chitter={chitter} />
         )}
       </div>
       <div>
-        <CreatePeep session={sessionData} />
+        {sessionData && <CreatePeep session={sessionData} chitter={chitter} />}
       </div>
       <div>
-        <DisplayPeeps session={sessionData} />
+        <DisplayPeeps session={sessionData} chitter={chitter} />
       </div>
     </div>
   );

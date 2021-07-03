@@ -1,11 +1,9 @@
 import { useState } from "react";
 import "./App.css";
 
-const SignUp = ({ session, setSession }) => {
+const SignUp = (props) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-
-  const chitter = "https://chitter-backend-api-v2.herokuapp.com"
 
   const sendUserRequest = async (url = "", data = {}) => {
     const userResponse = await fetch(url, {
@@ -32,14 +30,14 @@ const SignUp = ({ session, setSession }) => {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <br />
-        {session ? (
+        {props.session ? (
           ""
         ) : (
           <div>
             <button
               onClick={() => {
                 sendUserRequest(
-                  `${chitter}/users`,
+                  `${props.chitter}/users`,
                   {
                     user: {
                       handle: `${username}`,
@@ -49,7 +47,7 @@ const SignUp = ({ session, setSession }) => {
                 )
                   .then(() =>
                     sendUserRequest(
-                      `${chitter}/sessions`,
+                      `${props.chitter}/sessions`,
                       {
                         session: {
                           handle: `${username}`,
@@ -58,7 +56,7 @@ const SignUp = ({ session, setSession }) => {
                       }
                     )
                   )
-                  .then((data) => setSession(data));
+                  .then((data) => props.setSession(data));
               }}
             >
               Sign Up
@@ -67,14 +65,14 @@ const SignUp = ({ session, setSession }) => {
             <button
               onClick={() => {
                 sendUserRequest(
-                  `${chitter}/sessions`,
+                  `${props.chitter}/sessions`,
                   {
                     session: {
                       handle: `${username}`,
                       password: `${password}`,
                     },
                   }
-                ).then((data) => setSession(data));
+                ).then((data) => props.setSession(data));
               }}
             >
               Log in
