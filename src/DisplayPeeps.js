@@ -10,7 +10,7 @@ const DisplayPeeps = (props) => {
   }, [peeps]);
 
   const fetchPeepsPromise = () => {
-    fetch(`${props.chitter}/peeps`)
+    fetch(`https://chitter-backend-api-v2.herokuapp.com/peeps`)
       .then((res) => res.json())
       .then((data) => setPeeps(data));
   };
@@ -63,7 +63,7 @@ const DisplayPeeps = (props) => {
       } else {
         createLikeData(
           `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`
-        )
+        );
       }
     });
   };
@@ -82,34 +82,29 @@ const DisplayPeeps = (props) => {
                   {`${peep.likes.length} `}
                   {peep.likes.length === 1 ? "like" : "likes"}
                 </div>
-                {props.session &&
+                {props.session && (
                   <div id="svg-images">
-                  <img
-                    alt="cross"
-                    title="delete"
-                    className="images"
-                    width="30"
-                    onClick={() =>
-                      deletePeepData(
-                        `${props.chitter}/peeps/${peep.id}`
-                      )
-                    }
-                    src={process.env.PUBLIC_URL + "cross.svg"}
-                  />
+                    <img
+                      alt="cross"
+                      title="delete"
+                      className="images"
+                      width="30"
+                      onClick={() =>
+                        deletePeepData(`${props.chitter}/peeps/${peep.id}`)
+                      }
+                      src={process.env.PUBLIC_URL + "cross.svg"}
+                    />
 
-                  <img
-                    alt="thumbs-up"
-                    title="like"
-                    className="images"
-                    width="35"
-                    onClick={() => likeUnlike(peep)}
-                    src={process.env.PUBLIC_URL + "/like.svg"}
-                  />
-                </div>
-                
-                }
-                
-
+                    <img
+                      alt="thumbs-up"
+                      title="like"
+                      className="images"
+                      width="35"
+                      onClick={() => likeUnlike(peep)}
+                      src={process.env.PUBLIC_URL + "/like.svg"}
+                    />
+                  </div>
+                )}
               </div>
             </ul>
           ))

@@ -17,24 +17,24 @@ export const CreatePeep = (props) => {
     return response.json();
   };
 
-    return (
-      <div>
-        <textarea
-          id="input-peep"
-          placeholder="What would you like to post today?"
-          className="peep-text-input"
-          onChange={(e) => setPeepBody(e.target.value)}
-        ></textarea>
-        <br />
-        <button
-          onClick={() => {
-            postPeepData(`${props.chitter}/peeps`, {
-              peep: { user_id: `${props.session.user_id}`, body: `${peepBody}` },
-            });
-          }}
-        >
-          Submit
-        </button>
-      </div>
-    );
+  return (
+    <div>
+      <textarea
+        id="input-peep"
+        placeholder="What would you like to post today?"
+        className="peep-text-input"
+        onChange={(e) => setPeepBody(e.target.value)}
+      ></textarea>
+      <br />
+      <button
+        onClick={() => {
+          postPeepData(`${props.chitter}/peeps`, {
+            peep: { user_id: `${props.session.user_id}`, body: `${peepBody}` },
+          });
+        }}
+      >
+        Submit
+      </button>
+    </div>
+  );
 };

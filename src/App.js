@@ -6,7 +6,7 @@ import "./App.css";
 
 const App = () => {
   const [sessionData, setSessionData] = useState();
-  const chitter = "https://chitter-backend-api-v2.herokuapp.com"
+  const chitter = "https://chitter-backend-api-v2.herokuapp.com";
 
   return (
     <div className="app">
