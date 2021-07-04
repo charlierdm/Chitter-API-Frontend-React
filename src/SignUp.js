@@ -56,7 +56,7 @@ const SignUp = (props) => {
                       }
                     )
                   )
-                  .then((data) => props.setSession(data));
+                  .then((data) => data.errors ? alert("That username exists, choose another.") : props.setSession(data));
               }}
             >
               Sign Up
@@ -72,7 +72,7 @@ const SignUp = (props) => {
                       password: `${password}`,
                     },
                   }
-                ).then((data) => props.setSession(data));
+                ).then((data) => data.errors ? alert("Incorrect password, try again.") : props.setSession(data));
               }}
             >
               Log in
