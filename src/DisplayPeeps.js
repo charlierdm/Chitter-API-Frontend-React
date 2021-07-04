@@ -3,7 +3,7 @@ import dateFormat from "dateformat";
 import "./App.css";
 
 const DisplayPeeps = (props) => {
-  const [peeps, setPeeps] = useState();
+  const [peeps, setPeeps] = useState(undefined);
 
   useEffect(() => {
     fetchPeepsPromise();
@@ -15,31 +15,9 @@ const DisplayPeeps = (props) => {
       .then((data) => setPeeps(data));
   };
 
-  const deletePeepData = async (url = "") => {
+  const handlePeepUpdate = async (url = "", method) => {
     const response = await fetch(url, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Token token=${props.session.session_key}`,
-        "Content-Type": "application/json",
-      },
-    });
-    return response;
-  };
-
-  const createLikeData = async (url = "") => {
-    const response = await fetch(url, {
-      method: "PUT",
-      headers: {
-        Authorization: `Token token=${props.session.session_key}`,
-        "Content-Type": "application/json",
-      },
-    });
-    return response;
-  };
-
-  const deleteLikeData = async (url = "") => {
-    const response = await fetch(url, {
-      method: "DELETE",
+      method: method,
       headers: {
         Authorization: `Token token=${props.session.session_key}`,
         "Content-Type": "application/json",
@@ -50,19 +28,22 @@ const DisplayPeeps = (props) => {
 
   const likeUnlike = (peep) => {
     if (peep.likes.length === 0) {
-      createLikeData(
-        `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`
+      handlePeepUpdate(
+        `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`,
+        "PUT"
       );
     }
 
     peep.likes.forEach((el) => {
       if (el.user.id === props.session.user_id) {
-        deleteLikeData(
-          `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`
+        handlePeepUpdate(
+          `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`,
+          "DELETE"
         );
       } else {
-        createLikeData(
-          `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`
+        handlePeepUpdate(
+          `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`,
+          "PUT"
         );
       }
     });
@@ -90,7 +71,10 @@ const DisplayPeeps = (props) => {
                       className="images"
                       width="30"
                       onClick={() =>
-                        deletePeepData(`${props.chitter}/peeps/${peep.id}`)
+                        handlePeepUpdate(
+                          `${props.chitter}/peeps/${peep.id}`,
+                          "DELETE"
+                        )
                       }
                       src={process.env.PUBLIC_URL + "cross.svg"}
                     />
