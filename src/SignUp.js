@@ -30,33 +30,29 @@ const SignUp = (props) => {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <br />
-        {props.session ? (
-          ""
-        ) : (
+        {!props.session && (
           <div>
             <button
               onClick={() => {
-                sendUserRequest(
-                  `${props.chitter}/users`,
-                  {
-                    user: {
-                      handle: `${username}`,
-                      password: `${password}`,
-                    },
-                  }
-                )
+                sendUserRequest(`${props.chitter}/users`, {
+                  user: {
+                    handle: `${username}`,
+                    password: `${password}`,
+                  },
+                })
                   .then(() =>
-                    sendUserRequest(
-                      `${props.chitter}/sessions`,
-                      {
-                        session: {
-                          handle: `${username}`,
-                          password: `${password}`,
-                        },
-                      }
-                    )
+                    sendUserRequest(`${props.chitter}/sessions`, {
+                      session: {
+                        handle: `${username}`,
+                        password: `${password}`,
+                      },
+                    })
                   )
-                  .then((data) => data.errors ? alert("That username exists, choose another.") : props.setSession(data));
+                  .then((data) =>
+                    data.errors
+                      ? alert("That username exists, choose another.")
+                      : props.setSession(data)
+                  );
               }}
             >
               Sign Up
@@ -64,15 +60,16 @@ const SignUp = (props) => {
 
             <button
               onClick={() => {
-                sendUserRequest(
-                  `${props.chitter}/sessions`,
-                  {
-                    session: {
-                      handle: `${username}`,
-                      password: `${password}`,
-                    },
-                  }
-                ).then((data) => data.errors ? alert("Incorrect password, try again.") : props.setSession(data));
+                sendUserRequest(`${props.chitter}/sessions`, {
+                  session: {
+                    handle: `${username}`,
+                    password: `${password}`,
+                  },
+                }).then((data) =>
+                  data.errors
+                    ? alert("Incorrect password, try again.")
+                    : props.setSession(data)
+                );
               }}
             >
               Log in

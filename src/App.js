@@ -17,7 +17,11 @@ const App = () => {
             Log Out
           </button>
         ) : (
-          <SignUp setSession={setSessionData} session={sessionData} chitter={chitter} />
+          <SignUp
+            setSession={setSessionData}
+            session={sessionData}
+            chitter={chitter}
+          />
         )}
       </div>
       <div>

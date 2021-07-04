@@ -29,18 +29,21 @@ const DisplayPeeps = (props) => {
   const likeUnlike = (peep) => {
     if (peep.likes.length === 0) {
       handlePeepUpdate(
-        `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`, "PUT"
+        `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`,
+        "PUT"
       );
     }
 
     peep.likes.forEach((el) => {
       if (el.user.id === props.session.user_id) {
         handlePeepUpdate(
-          `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`, "DELETE"
+          `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`,
+          "DELETE"
         );
       } else {
         handlePeepUpdate(
-          `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`, "PUT"
+          `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`,
+          "PUT"
         );
       }
     });
@@ -68,7 +71,10 @@ const DisplayPeeps = (props) => {
                       className="images"
                       width="30"
                       onClick={() =>
-                        handlePeepUpdate(`${props.chitter}/peeps/${peep.id}`, "DELETE")
+                        handlePeepUpdate(
+                          `${props.chitter}/peeps/${peep.id}`,
+                          "DELETE"
+                        )
                       }
                       src={process.env.PUBLIC_URL + "cross.svg"}
                     />

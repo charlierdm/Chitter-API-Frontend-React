@@ -33,7 +33,7 @@ button {
   min-height: 80vh;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin:auto;
+  margin: auto;
 }
 
 .peep-details {
@@ -41,7 +41,7 @@ button {
   color: rgb(95, 95, 95);
   padding: 1%;
   font-size: 75%;
-  margin:auto
+  margin: auto;
 }
 
 .peeps-list {
