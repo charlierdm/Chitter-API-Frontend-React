@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 
 export const CreatePeep = (props) => {
-  const [peepBody, setPeepBody] = useState();
+  const [peepBody, setPeepBody] = useState("");
 
   const postPeepData = async (url = "", data = {}) => {
     const response = await fetch(url, {
@@ -17,24 +17,27 @@ export const CreatePeep = (props) => {
     return response.json();
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    postPeepData(`${props.chitter}/peeps`, {
+      peep: { user_id: `${props.session.user_id}`, body: `${peepBody}` },
+    });
+    setPeepBody("");
+  };
+
   return (
     <div>
-      <textarea
-        id="input-peep"
-        placeholder="What would you like to post today?"
-        className="peep-text-input"
-        onChange={(e) => setPeepBody(e.target.value)}
-      ></textarea>
-      <br />
-      <button
-        onClick={() => {
-          postPeepData(`${props.chitter}/peeps`, {
-            peep: { user_id: `${props.session.user_id}`, body: `${peepBody}` },
-          });
-        }}
-      >
-        Submit
-      </button>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <textarea
+          value={peepBody}
+          id="input-peep"
+          placeholder="What would you like to post today?"
+          className="peep-text-input"
+          onChange={(e) => setPeepBody(e.target.value)}
+        ></textarea>
+        <br />
+        <button>Submit</button>
+      </form>
     </div>
   );
 };

@@ -48,11 +48,7 @@ const SignUp = (props) => {
                       },
                     })
                   )
-                  .then((data) =>
-                    data.errors
-                      ? alert("That username exists, choose another.")
-                      : props.setSession(data)
-                  );
+                  .then((data) => props.setSession(data));
               }}
             >
               Sign Up
