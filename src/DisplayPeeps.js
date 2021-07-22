@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import dateFormat from "dateformat";
 import "./App.css";
 
-const DisplayPeeps = (props) => {
+export const DisplayPeeps = (props) => {
   const [peeps, setPeeps] = useState(undefined);
 
   useEffect(() => {
@@ -96,5 +96,3 @@ const DisplayPeeps = (props) => {
     </div>
   );
 };
-
-export default DisplayPeeps;

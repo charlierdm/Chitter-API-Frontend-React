@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 
-const SignUp = (props) => {
+export const SignUp = (props) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
@@ -77,4 +77,3 @@ const SignUp = (props) => {
   );
 };
 
-export default SignUp;

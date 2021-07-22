@@ -1,5 +1,5 @@
-import DisplayPeeps from "./DisplayPeeps";
-import SignUp from "./SignUp";
+import { DisplayPeeps } from "./DisplayPeeps";
+import { SignUp } from "./SignUp";
 import { CreatePeep } from "./CreatePeep";
 import { useState } from "react";
 import "./App.css";
