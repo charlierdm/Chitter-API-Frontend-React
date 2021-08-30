@@ -3,7 +3,7 @@ import dateFormat from "dateformat";
 import "./App.css";
 
 export const DisplayPeeps = (props) => {
-  const [peeps, setPeeps] = useState(undefined);
+  const [peeps, setPeeps] = useState([]);
 
   useEffect(() => {
     fetchPeepsPromise();
@@ -50,21 +50,20 @@ export const DisplayPeeps = (props) => {
   };
 
   return (
-    <div className="peeps">
+    <div className="peeps-list">
       {peeps
         ? peeps.map((peep) => (
-            <ul className="peeps-list" key={peep.id}>
-              <div className="peep-body">{peep.body}</div>
-              <div className="peep-details">
-                posted by: {peep.user.handle}
-                <br />
-                {dateFormat(peep.created_at, "mmmm dS, h:MM:ss TT")}
-                <div>
+            <ul className="peep" key={peep.id}>
+              <li className="peep-body">{peep.body}</li>
+              <li className="peep-user-handle"> posted by: {peep.user.handle}</li>
+              <li className="peep-date">{dateFormat(peep.created_at, "mmmm dS, h:MM:ss TT")}</li>
+                
+                <li className="peep-likes">
                   {`${peep.likes.length} `}
                   {peep.likes.length === 1 ? "like" : "likes"}
-                </div>
+                </li>
                 {props.session && (
-                  <div id="svg-images">
+                  <li id="svg-images">
                     <img
                       alt="cross"
                       title="delete"
@@ -87,9 +86,8 @@ export const DisplayPeeps = (props) => {
                       onClick={() => likeUnlike(peep)}
                       src={process.env.PUBLIC_URL + "/like.svg"}
                     />
-                  </div>
+                  </li>
                 )}
-              </div>
             </ul>
           ))
         : "Loading..."}

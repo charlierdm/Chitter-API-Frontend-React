@@ -11,9 +11,9 @@ input {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  padding: 0.2%;
-  margin: 0.5%;
-  border-radius: 0.4em;
+  padding: 0.2rem;
+  margin: 0.5rem;
+  border-radius: 0.4rem;
 }
 
 button {
@@ -29,51 +29,65 @@ button {
   border-radius: 0.4em;
 }
 
-.peeps {
+.peeps-list {
   min-height: 80vh;
   font-size: calc(10px + 2vmin);
   color: white;
   margin: auto;
 }
 
-.peep-details {
-  width: max-content;
+.peep-user-handle {
   color: rgb(95, 95, 95);
-  padding: 1%;
-  font-size: 75%;
-  margin: auto;
+  padding: 0.5rem;
+  font-size: 1.2rem;
 }
 
-.peeps-list {
+.peep-date {
+  color: rgb(95, 95, 95);
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  margin: 0 0rem 1rem 0;
+}
+
+.peep-likes {
+  margin: 0.5rem 1rem;
+  font-size: 1.2rem;
+}
+
+.peep-body {
+  width: 20rem;
+  margin-bottom: 0.5rem;
+  color: black;
+  font-size: 1.4rem;
+}
+
+.peep {
+  list-style: none;
+  max-width: 20rem;
   padding: 0;
   border-style: solid;
   border-color: whitesmoke;
   background-color: #a1cab5;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   border-spacing: 6em 0.2em;
   display: table;
   margin-left: auto;
   margin-right: auto;
 }
 
-.peep-body {
-  width: auto;
-  margin-bottom: 2%;
-  color: black;
-  font-size: 23px;
-}
-
 .peep-text-input {
   padding: 0.5em;
   border-style: none;
-  width: 500px;
-  height: 150px;
+  text-align: center;
+  width: 30rem;
+  height: 10rem;
   border-radius: 0.4em;
-  margin: auto;
+  margin: 1rem
 }
 
 .title {
-  font-size: 3.5em;
+  font-size: 3.5rem;
+  margin: 4rem, 4rem;
   font-weight: bold;
   color: rgb(255, 255, 255);
   font-style: italic;
