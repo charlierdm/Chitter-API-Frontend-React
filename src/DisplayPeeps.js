@@ -55,39 +55,43 @@ export const DisplayPeeps = (props) => {
         ? peeps.map((peep) => (
             <ul className="peep" key={peep.id}>
               <h3 className="peep-body">{peep.body}</h3>
-              <li className="peep-user-handle"> posted by: {peep.user.handle}</li>
-              <li className="peep-date">{dateFormat(peep.created_at, "mmmm dS, h:MM:ss TT")}</li>
-                
-                <li className="peep-likes">
-                  {`${peep.likes.length} `}
-                  {peep.likes.length === 1 ? "like" : "likes"}
-                </li>
-                {props.session && (
-                  <li id="svg-images">
-                    <img
-                      alt="cross"
-                      title="delete"
-                      className="images"
-                      width="30"
-                      onClick={() =>
-                        handlePeepUpdate(
-                          `${props.chitter}/peeps/${peep.id}`,
-                          "DELETE"
-                        )
-                      }
-                      src={process.env.PUBLIC_URL + "cross.svg"}
-                    />
+              <li className="peep-user-handle">
+                {" "}
+                posted by: {peep.user.handle}
+              </li>
+              <li className="peep-date">
+                {dateFormat(peep.created_at, "mmmm dS, h:MM:ss TT")}
+              </li>
+              <li className="peep-likes">
+                {`${peep.likes.length} `}
+                {peep.likes.length === 1 ? "like" : "likes"}
+              </li>
+              {props.session && (
+                <li id="svg-images">
+                  <img
+                    alt="cross"
+                    title="delete"
+                    className="images"
+                    width="30"
+                    onClick={() =>
+                      handlePeepUpdate(
+                        `${props.chitter}/peeps/${peep.id}`,
+                        "DELETE"
+                      )
+                    }
+                    src={process.env.PUBLIC_URL + "cross.svg"}
+                  />
 
-                    <img
-                      alt="thumbs-up"
-                      title="like"
-                      className="images"
-                      width="35"
-                      onClick={() => likeUnlike(peep)}
-                      src={process.env.PUBLIC_URL + "/like.svg"}
-                    />
-                  </li>
-                )}
+                  <img
+                    alt="thumbs-up"
+                    title="like"
+                    className="images"
+                    width="35"
+                    onClick={() => likeUnlike(peep)}
+                    src={process.env.PUBLIC_URL + "/like.svg"}
+                  />
+                </li>
+              )}
             </ul>
           ))
         : "Loading..."}

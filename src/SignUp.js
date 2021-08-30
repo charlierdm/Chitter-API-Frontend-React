@@ -6,6 +6,7 @@ export const SignUp = (props) => {
   const [password, setPassword] = useState();
 
   const sendUserRequest = async (url = "", data = {}) => {
+    if (data.handle === "" || data.password === "") return alert("You must enter a valid username and password!")
     const userResponse = await fetch(url, {
       method: "POST",
       headers: {
