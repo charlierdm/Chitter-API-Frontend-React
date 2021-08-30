@@ -54,7 +54,7 @@ export const DisplayPeeps = (props) => {
       {peeps
         ? peeps.map((peep) => (
             <ul className="peep" key={peep.id}>
-              <li className="peep-body">{peep.body}</li>
+              <h3 className="peep-body">{peep.body}</h3>
               <li className="peep-user-handle"> posted by: {peep.user.handle}</li>
               <li className="peep-date">{dateFormat(peep.created_at, "mmmm dS, h:MM:ss TT")}</li>
                 
