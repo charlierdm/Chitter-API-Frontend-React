@@ -54,14 +54,13 @@ export const DisplayPeeps = (props) => {
       {peeps
         ? peeps.map((peep) => (
             <ul className="peep" key={peep.id}>
+              <li className="user-and-date">
+               <span className="written-by"><span className="user">{peep.user.handle}</span> wrote:</span>
+                <span className="peep-date">
+                  {dateFormat(peep.created_at, "mmmm dS, h:MM TT")}
+                </span>
+              </li>
               <h3 className="peep-body">{peep.body}</h3>
-              <li className="peep-user-handle">
-                {" "}
-                posted by: {peep.user.handle}
-              </li>
-              <li className="peep-date">
-                {dateFormat(peep.created_at, "mmmm dS, h:MM:ss TT")}
-              </li>
               <li className="peep-likes">
                 {`${peep.likes.length} `}
                 {peep.likes.length === 1 ? "like" : "likes"}
