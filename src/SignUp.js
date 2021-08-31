@@ -1,12 +1,11 @@
 import { useState } from "react";
 import "./App.css";
 
-export const SignUp = (props) => {
+export const SignUp = ({ session, setSession, chitter }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
   const sendUserRequest = async (url = "", data = {}) => {
-    if (data.handle === "" || data.password === "") return alert("You must enter a valid username and password!")
     const userResponse = await fetch(url, {
       method: "POST",
       headers: {
@@ -17,64 +16,53 @@ export const SignUp = (props) => {
     return userResponse.json();
   };
 
-  return (
-    <div>
-      <div>
-        <input
-          type="username"
-          placeholder="username"
-          onChange={(e) => setUsername(e.target.value)}
-        ></input>
-        <input
-          type="password"
-          placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
-        <br />
-        {!props.session && (
-          <div>
-            <button
-              onClick={() => {
-                sendUserRequest(`${props.chitter}/users`, {
-                  user: {
-                    handle: `${username}`,
-                    password: `${password}`,
-                  },
-                })
-                  .then(() =>
-                    sendUserRequest(`${props.chitter}/sessions`, {
-                      session: {
-                        handle: `${username}`,
-                        password: `${password}`,
-                      },
-                    })
-                  )
-                  .then((data) => props.setSession(data));
-              }}
-            >
-              Sign Up
-            </button>
+  const handleSignUp = () => {
+    sendUserRequest(`${chitter}/users`, {
+      user: {
+        handle: `${username}`,
+        password: `${password}`,
+      },
+    })
+      .then(() =>
+        sendUserRequest(`${chitter}/sessions`, {
+          session: {
+            handle: `${username}`,
+            password: `${password}`,
+          },
+        })
+      )
+      .then((data) => setSession(data));
+  };
 
-            <button
-              onClick={() => {
-                sendUserRequest(`${props.chitter}/sessions`, {
-                  session: {
-                    handle: `${username}`,
-                    password: `${password}`,
-                  },
-                }).then((data) =>
-                  data.errors
-                    ? alert("Incorrect password, try again.")
-                    : props.setSession(data)
-                );
-              }}
-            >
-              Log in
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+  const handleLogIn = () => {
+    sendUserRequest(`${chitter}/sessions`, {
+      session: {
+        handle: `${username}`,
+        password: `${password}`,
+      },
+    }).then((data) =>
+      data.errors ? alert("Incorrect password, try again.") : setSession(data)
+    );
+  };
+
+  return (
+    <>
+      <input
+        type="username"
+        placeholder="username"
+        onChange={(e) => setUsername(e.target.value)}
+      ></input>
+      <input
+        type="password"
+        placeholder="password"
+        onChange={(e) => setPassword(e.target.value)}
+      ></input>
+      {!session && (
+        <div>
+          <button onClick={() => handleSignUp()}>Sign Up</button>
+          <button onClick={() => handleLogIn()}>Log in</button>
+        </div>
+      )}
+    </>
   );
 };
-

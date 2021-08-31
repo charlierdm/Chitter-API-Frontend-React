@@ -24,12 +24,8 @@ const App = () => {
           />
         )}
       </div>
-      <div>
         {sessionData && <CreatePeep session={sessionData} chitter={chitter} />}
-      </div>
-      <div>
         <DisplayPeeps session={sessionData} chitter={chitter} />
-      </div>
     </div>
   );
 };

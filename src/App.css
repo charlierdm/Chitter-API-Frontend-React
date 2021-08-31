@@ -37,6 +37,7 @@ button {
 .peeps-list {
   min-height: 80vh;
   max-width: 60rem;
+  min-width: 60rem;
   font-size: calc(10px + 2vmin);
   align-content: center;
   color: white;
