@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import dateFormat from "dateformat";
 import "./App.css";
 
-export const DisplayPeeps = (props) => {
+export const DisplayPeeps = ({ session, chitter }) => {
   const [peeps, setPeeps] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export const DisplayPeeps = (props) => {
     const response = await fetch(url, {
       method: method,
       headers: {
-        Authorization: `Token token=${props.session.session_key}`,
+        Authorization: `Token token=${session.session_key}`,
         "Content-Type": "application/json",
       },
     });
@@ -29,20 +29,20 @@ export const DisplayPeeps = (props) => {
   const likeUnlike = (peep) => {
     if (peep.likes.length === 0) {
       handlePeepUpdate(
-        `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`,
+        `${chitter}/peeps/${peep.id}/likes/${session.user_id}`,
         "PUT"
       );
     }
 
     peep.likes.forEach((el) => {
-      if (el.user.id === props.session.user_id) {
+      if (el.user.id === session.user_id) {
         handlePeepUpdate(
-          `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`,
+          `${chitter}/peeps/${peep.id}/likes/${session.user_id}`,
           "DELETE"
         );
       } else {
         handlePeepUpdate(
-          `${props.chitter}/peeps/${peep.id}/likes/${props.session.user_id}`,
+          `${chitter}/peeps/${peep.id}/likes/${session.user_id}`,
           "PUT"
         );
       }
@@ -67,7 +67,7 @@ export const DisplayPeeps = (props) => {
                 {`${peep.likes.length} `}
                 {peep.likes.length === 1 ? "like" : "likes"}
               </li>
-              {props.session && (
+              {session && (
                 <li id="svg-images">
                   <img
                     alt="cross"
@@ -75,10 +75,7 @@ export const DisplayPeeps = (props) => {
                     className="images"
                     width="30"
                     onClick={() =>
-                      handlePeepUpdate(
-                        `${props.chitter}/peeps/${peep.id}`,
-                        "DELETE"
-                      )
+                      handlePeepUpdate(`${chitter}/peeps/${peep.id}`, "DELETE")
                     }
                     src={process.env.PUBLIC_URL + "cross.svg"}
                   />
