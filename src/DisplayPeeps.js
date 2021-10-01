@@ -20,7 +20,7 @@ export const DisplayPeeps = ({ session, chitter }) => {
       {peeps
         ? peeps.map((peep) => (
             <Peep
-              id={peep.id}
+              key={peep.id}
               userHandle={peep.user.handle}
               createdAt={peep.created_at}
               peepBody={peep.body}

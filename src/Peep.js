@@ -3,7 +3,7 @@ import cross from "./cross.svg";
 import like from "./like.svg";
 
 export const Peep = ({
-  id,
+  key,
   userHandle,
   createdAt,
   peepBody,
@@ -12,7 +12,7 @@ export const Peep = ({
   peep,
   chitter,
 }) => {
-  
+
   const handlePeepUpdate = async (url = "", method) => {
     if (!session) return alert("You must be logged in to like/unlike peeps!");
     const response = await fetch(url, {
@@ -38,7 +38,7 @@ export const Peep = ({
   };
 
   return (
-    <ul className="peep" key={id}>
+    <ul className="peep" key={key}>
       <li className="user-and-date">
         <span className="written-by">
           <span className="user">{userHandle}</span> wrote:
@@ -60,10 +60,9 @@ export const Peep = ({
           title="delete"
           className="images"
           width="30"
-          onClick={() => handlePeepUpdate(`${chitter}/peeps/${id}`, "DELETE")}
+          onClick={() => handlePeepUpdate(`${chitter}/peeps/${key}`, "DELETE")}
           src={cross}
         />
-
         <img
           alt="thumbs-up"
           title="like"
