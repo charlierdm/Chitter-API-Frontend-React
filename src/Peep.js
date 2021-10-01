@@ -3,7 +3,7 @@ import cross from "./cross.svg";
 import like from "./like.svg";
 
 export const Peep = ({
-  key,
+  id,
   userHandle,
   createdAt,
   peepBody,
@@ -38,7 +38,7 @@ export const Peep = ({
   };
 
   return (
-    <ul className="peep" key={key}>
+    <ul className="peep">
       <li className="user-and-date">
         <span className="written-by">
           <span className="user">{userHandle}</span> wrote:
@@ -60,7 +60,7 @@ export const Peep = ({
           title="delete"
           className="images"
           width="30"
-          onClick={() => handlePeepUpdate(`${chitter}/peeps/${key}`, "DELETE")}
+          onClick={() => handlePeepUpdate(`${chitter}/peeps/${id}`, "DELETE")}
           src={cross}
         />
         <img

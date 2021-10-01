@@ -16,7 +16,7 @@ export const DisplayPeeps = ({ session, chitter }) => {
   };
 
   return (
-    <div className="peeps-list">
+    <ul className="peeps-list">
       {peeps
         ? peeps.map((peep) => (
             <Peep
@@ -31,6 +31,6 @@ export const DisplayPeeps = ({ session, chitter }) => {
             />
           ))
         : "Loading..."}
-    </div>
+    </ul>
   );
 };
