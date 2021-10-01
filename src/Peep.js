@@ -14,6 +14,7 @@ export const Peep = ({
 }) => {
   
   const handlePeepUpdate = async (url = "", method) => {
+    if (!session) return alert("You must be logged in to like/unlike peeps!");
     const response = await fetch(url, {
       method: method,
       headers: {
@@ -25,6 +26,7 @@ export const Peep = ({
   };
 
   const likeUnlike = (peep) => {
+    if (!session) return alert("You must be logged in to like/unlike peeps!");
     let url = `${chitter}/peeps/${peep.id}/likes/${session.user_id}`;
     if (peep.likes.length === 0) return handlePeepUpdate(url, "PUT");
 
@@ -52,27 +54,25 @@ export const Peep = ({
         {`${likes.length} `}
         {likes.length === 1 ? "like" : "likes"}
       </li>
-      {session && (
-        <li id="svg-images">
-          <img
-            alt="cross"
-            title="delete"
-            className="images"
-            width="30"
-            onClick={() => handlePeepUpdate(`${chitter}/peeps/${id}`, "DELETE")}
-            src={cross}
-          />
+      <li id="svg-images">
+        <img
+          alt="cross"
+          title="delete"
+          className="images"
+          width="30"
+          onClick={() => handlePeepUpdate(`${chitter}/peeps/${id}`, "DELETE")}
+          src={cross}
+        />
 
-          <img
-            alt="thumbs-up"
-            title="like"
-            className="images"
-            width="35"
-            onClick={() => likeUnlike(peep)}
-            src={like}
-          />
-        </li>
-      )}
+        <img
+          alt="thumbs-up"
+          title="like"
+          className="images"
+          width="35"
+          onClick={() => likeUnlike(peep)}
+          src={like}
+        />
+      </li>
     </ul>
   );
 };
