@@ -22,7 +22,7 @@ export const DisplayPeeps = ({ session, chitter }) => {
             <Peep
               id={peep.id}
               userHandle={peep.user.handle}
-              createdAt={peep.createdAt}
+              createdAt={peep.created_at}
               peepBody={peep.body}
               likes={peep.likes}
               session={session}

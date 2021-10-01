@@ -1,4 +1,6 @@
 import dateFormat from "dateformat";
+import cross from "./cross.svg";
+import like from "./like.svg";
 
 export const Peep = ({
   id,
@@ -10,6 +12,7 @@ export const Peep = ({
   peep,
   chitter,
 }) => {
+  
   const handlePeepUpdate = async (url = "", method) => {
     const response = await fetch(url, {
       method: method,
@@ -42,7 +45,9 @@ export const Peep = ({
           {dateFormat(createdAt, "mmmm dS, h:MM TT")}
         </span>
       </li>
-      <h3 className="peep-body">{peepBody}</h3>
+      <li>
+        <h3 className="peep-body">{peepBody}</h3>
+      </li>
       <li className="peep-likes">
         {`${likes.length} `}
         {likes.length === 1 ? "like" : "likes"}
@@ -55,7 +60,7 @@ export const Peep = ({
             className="images"
             width="30"
             onClick={() => handlePeepUpdate(`${chitter}/peeps/${id}`, "DELETE")}
-            src={process.env.PUBLIC_URL + "cross.svg"}
+            src={cross}
           />
 
           <img
@@ -64,7 +69,7 @@ export const Peep = ({
             className="images"
             width="35"
             onClick={() => likeUnlike(peep)}
-            src={process.env.PUBLIC_URL + "/like.svg"}
+            src={like}
           />
         </li>
       )}
